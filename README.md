@@ -87,6 +87,14 @@ Proksee https://proksee.ca/
 ## 2. Anotación estructural y funcional de un genoma
 
 ```bash
+cd ~/genomics/assembly/nanopore
+
+conda activate genome
+
+prinseq-lite.pl -fasta /data/2025_1/database/m01_flye.racon.fasta -min_len 500 -seq_id "m01_00" -out_good m01_genome_final
+```
+
+```bash
 cd ~/genomics
 
 mkdir annotation
@@ -95,7 +103,7 @@ cd annotation
 
 conda activate pgcgap
 
-prokka --outdir prokka --cpus 10 --kingdom Bacteria --gcode 11 --addgenes --rfam --prefix m01 /data/2025_1/database/m01_flye.racon.fasta
+prokka --outdir prokka --cpus 10 --kingdom Bacteria --gcode 11 --addgenes --rfam --prefix m01 ~/genomics/assembly/nanopore/m01_genome_final.fasta
 ```
 
 > **Comentario:** 
@@ -106,7 +114,7 @@ prokka --outdir prokka --cpus 10 --kingdom Bacteria --gcode 11 --addgenes --rfam
 > - `--addgenes`: Esta opción le indica a Prokka que intente añadir nombres de genes a las anotaciones en el archivo GFF resultante, lo cual es útil para visualizaciones posteriores.
 > - `--rfam`: Le dice a Prokka que busque y anote secuencias de ARN no codificantes utilizando la base de datos Rfam.
 > - `--prefix m01`: Establece el prefijo "m01_" para todos los nombres de los archivos de salida y las características anotadas. Esto ayuda a organizar los resultados, especialmente al anotar múltiples genomas.
-> - `/data/2025_1/database/m01_flye.racon.fasta`: Especifica la ruta al archivo de secuencia de entrada en formato FASTA que contiene el genoma a ser anotado.
+> - `~/genomics/assembly/nanopore/m01_genome_final.fasta`: Especifica la ruta al archivo de secuencia de entrada en formato FASTA que contiene el genoma a ser anotado.
 ```
 
 ```bash
@@ -597,27 +605,4 @@ m01_flye.racon:AD413    1       69340   0.44936544563022784     352832786a442f1f
 
 ```bash
 ls -lh ~/genomics/assembly/nanopore
-
-total 11M
--rw-rw-r-- 1 alumno04 alumno04 429K abr 30 16:14 b06_flye.fasta
--rw-rw-r-- 1 alumno04 alumno04 435K abr 30 16:14 b06_flye.gfa
-drwxrwxr-x 7 alumno04 alumno04 4,0K abr 30 16:26 b06_flye_nanopore
--rw-rw-r-- 1 alumno04 alumno04 4,8M abr 30 14:17 m01_flye.fasta
--rw-rw-r-- 1 alumno04 alumno04 4,8M abr 30 14:17 m01_flye.gfa
-drwxrwxr-x 7 alumno04 alumno04 4,0K abr 30 14:37 m01_flye_nanopore
-drwxrwxr-x 2 alumno04 alumno04 4,0K may  7 10:41 racon
 ```
-
-```bash
-cd ~/genomics/assembly/nanopore
-
-conda activate genome
-
-prinseq-lite.pl -fasta b06_flye.fasta -min_len 500 -seq_id "b06_00" -out_good b06_genome_final
-```
-
-> **Comentario:** 
-> - `-fasta b06_flye.fasta`: Esta opción especifica el archivo de entrada en formato FASTA. Este archivo contiene secuencias de contigs ensamblados con Flye.
-> - `-min_len 500`: Esta opción indica que se conservarán solo las secuencias (en este caso, los contigs) que tengan una longitud mínima de 500 nucleótidos. Cualquier secuencia más corta será descartada. Esto es útil para eliminar fragmentos muy pequeños que podrían ser ruido o ensamblajes incompletos.
-> - `-seq_id "b06_00"`: Esta opción establece un prefijo para los identificadores (headers) de las secuencias que pasen el filtro. En este caso, a cada secuencia válida se le asignará un ID que comience con "b06_00". Si hubiera varias secuencias resultantes, PRINSEQ-lite probablemente agregaría un número secuencial a este prefijo (por ejemplo, b06_00_1, b06_00_2, etc.). Esto ayuda a estandarizar y rastrear los identificadores de las secuencias filtradas.
-> - `-out_good b06_genome_final.fasta`: Esta opción especifica el nombre del archivo de salida donde se guardarán las secuencias que pasaron todos los criterios de filtrado (en este caso, solo el criterio de longitud mínima). El archivo de salida se llamará b06_genome_final.fasta y estará en formato FASTA.

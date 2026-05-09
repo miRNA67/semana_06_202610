@@ -606,3 +606,17 @@ m01_flye.racon:AD413    1       69340   0.44936544563022784     352832786a442f1f
 ```bash
 ls -lh ~/genomics/assembly/nanopore
 ```
+
+> **Bitácora bioinformática:** 
+> - `Caratula (usar el de Principios de Programación Bioinformática)`
+> - `Titulo`
+> - `Objetivo de la práctica`
+> - `Metodologia: Flujograma de los análisis realizados`
+> - `Metodologia: Estructura de las carpetas`
+> - `Resultados: Anotación estructural`
+> - `Resultados: Anotación funcional a nivel de COG`
+> - `Resultados: Identificación de genes de virulencia y resistencia`
+> - `Resultados: Identificación de elementos móviles y plásmidos`
+> - `Resultados: Identificación de rutas metabolicas relacionadas con la biología de la bacteria (3 rutas como máximo)`
+> - `Resultados: Identificación de clústeres de genes de biosíntesis de metabolitos secundarios`
+> - `Discusión: Que importancia tiene la anotación funcional de un genoma`
